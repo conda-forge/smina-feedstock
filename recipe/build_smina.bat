@@ -11,9 +11,13 @@ echo const char* GIT_REV="%GIT_HASH%";     >  version.cpp
 echo const char* GIT_TAG="%PKG_VERSION%";  >> version.cpp
 echo const char* GIT_BRANCH="conda-forge"; >> version.cpp
 
+:: upstream smina uses deprecated boost headers; allow for now
+set "CXXFLAGS=%CXXFLAGS% -DBOOST_TIMER_ENABLE_DEPRECATED"
+
 cmake %SRC_DIR% %CMAKE_ARGS% ^
     -GNinja ^
     -DCMAKE_BUILD_TYPE=Release ^
+    -DCMAKE_CXX_STANDARD=14 ^
     -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
     -DOPENBABEL_DIR="%LIBRARY_PREFIX%" ^
     -DOPENBABEL3_LIBRARIES="%LIBRARY_PREFIX%/bin/openbabel-3.lib" ^
