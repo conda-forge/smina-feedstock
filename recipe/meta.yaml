@@ -27,6 +27,9 @@ requirements:
     - make     # [unix]
     - ninja    # [win]
   host:
+    # Smina not compatible with more recent libboost versions
+    # see https://github.com/conda-forge/smina-feedstock/pull/3
+    # and https://github.com/conda-forge/smina-feedstock/pull/4
     - libboost-devel 1.82.*
     - eigen
     - openbabel
