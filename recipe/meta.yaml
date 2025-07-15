@@ -13,7 +13,7 @@ source:
       - cmake.patch
 
 build:
-  number: 1
+  number: 2
   script:
     - env GIT_HASH={{ commit }} bash {{ RECIPE_DIR }}/build_smina.sh    # [unix]
     - set GIT_HASH={{ commit }}  &&  {{ RECIPE_DIR }}\build_smina.bat   # [win]
@@ -22,11 +22,15 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
     - cmake
     - make     # [unix]
     - ninja    # [win]
   host:
-    - libboost-devel
+    # Smina not compatible with more recent libboost versions
+    # see https://github.com/conda-forge/smina-feedstock/pull/3
+    # and https://github.com/conda-forge/smina-feedstock/pull/4
+    - libboost-devel 1.82.*
     - eigen
     - openbabel
   run:
