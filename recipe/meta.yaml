@@ -1,5 +1,5 @@
 {% set name = "smina" %}
-{% set version = "2020.12.10" %}
+{% set version = "2021.12.09" %}
 {% set commit = "b08c07c" %}
 
 package:
@@ -8,12 +8,12 @@ package:
 
 source:
   - url: https://github.com/jaimergp/smina/archive/{{ version }}.tar.gz
-    sha256: 4b99cdec7972994d7700cfe39a44824f21af5e7c6efc54d2725df785adc9cfbd
+    sha256: 4fdb9a3d0293ceb868b1c492b8e6fb1673948638ccd382174c41e68a443aa795
     patches:
       - cmake.patch
 
 build:
-  number: 2
+  number: 0
   script:
     - env GIT_HASH={{ commit }} bash {{ RECIPE_DIR }}/build_smina.sh    # [unix]
     - set GIT_HASH={{ commit }}  &&  {{ RECIPE_DIR }}\build_smina.bat   # [win]
